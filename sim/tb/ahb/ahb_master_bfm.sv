@@ -27,6 +27,7 @@ package ahb_master_bfm_pkg;
                                output int unsigned waited);
       // Address/control phase
       @(posedge bus.HCLK);
+      bus.HSEL   <= 1'b1;
       bus.HADDR  <= addr;
       bus.HTRANS <= ahb_if::NONSEQ;
       bus.HWRITE <= 1'b1;
@@ -38,6 +39,7 @@ package ahb_master_bfm_pkg;
 
       // Return to IDLE
       @(posedge bus.HCLK);
+      bus.HSEL   <= 1'b0;
       bus.HTRANS <= ahb_if::IDLE;
       bus.HWRITE <= 1'b0;
       bus.HADDR  <= '0;
@@ -49,6 +51,7 @@ package ahb_master_bfm_pkg;
                               output int unsigned waited);
       // Address/control phase
       @(posedge bus.HCLK);
+      bus.HSEL   <= 1'b1;
       bus.HADDR  <= addr;
       bus.HTRANS <= ahb_if::NONSEQ;
       bus.HWRITE <= 1'b0;
@@ -60,6 +63,7 @@ package ahb_master_bfm_pkg;
 
       // Return to IDLE
       @(posedge bus.HCLK);
+      bus.HSEL   <= 1'b0;
       bus.HTRANS <= ahb_if::IDLE;
       bus.HADDR  <= '0;
     endtask

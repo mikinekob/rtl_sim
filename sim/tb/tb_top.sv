@@ -1,9 +1,6 @@
 `timescale 1ns/1ps
 
 module tb_top;
-  // TODO: Fill in DUT instance and connect to AHB interface as discussed.
-  // This placeholder exists so sim compiles once you add the missing pieces.
-
   logic HCLK;
   logic HRESETn;
 
@@ -20,7 +17,7 @@ module tb_top;
     bus.drive_defaults();
   end
 
-  // Reset task called by test_runner
+  // Reset task called by patterns via $root.tb_top.apply_hw_reset()
   task automatic apply_hw_reset();
     bus.drive_defaults();
     HRESETn = 1'b0;
@@ -35,9 +32,28 @@ module tb_top;
     apply_hw_reset();
   end
 
-  // Stub IRQ
+  // DUT (empty stub for now)
   logic irq;
-  assign irq = 1'b0;
+
+  dut_empty u_dut (
+    .HCLK(HCLK),
+    .HRESETn(HRESETn),
+
+    .HADDR(bus.HADDR),
+    .HTRANS(bus.HTRANS),
+    .HWRITE(bus.HWRITE),
+    .HSIZE(bus.HSIZE),
+    .HBURST(bus.HBURST),
+    .HPROT(bus.HPROT),
+    .HMASTLOCK(bus.HMASTLOCK),
+    .HWDATA(bus.HWDATA),
+
+    .HRDATA(bus.HRDATA),
+    .HREADYOUT(bus.HREADYOUT),
+    .HRESP(bus.HRESP),
+
+    .irq(irq)
+  );
 
   // Runner
   test_runner u_test(

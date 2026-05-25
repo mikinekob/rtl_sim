@@ -3,6 +3,9 @@ sim/tb/ahb/ahb_if.sv
 sim/tb/ahb/ahb_types.sv
 sim/tb/ahb/ahb_master_bfm.sv
 
+# Empty DUT stub
+sim/tb/dut_empty.sv
+
 # Register model / defs
 sim/tb/reg/reg_defs_pkg.sv
 sim/tb/reg/reg_model_pkg.sv

@@ -1,6 +1,7 @@
 interface ahb_if(input logic HCLK, input logic HRESETn);
 
   // Master -> Slave
+  logic        HSEL;   // single-slave select (AHB-Lite)
   logic [31:0] HADDR;
   logic [ 1:0] HTRANS;
   logic        HWRITE;
@@ -21,6 +22,7 @@ interface ahb_if(input logic HCLK, input logic HRESETn);
   localparam logic [1:0] SEQ    = 2'b11;
 
   task automatic drive_defaults();
+    HSEL      <= 1'b0;
     HADDR     <= '0;
     HTRANS    <= IDLE;
     HWRITE    <= 1'b0;
@@ -33,13 +35,13 @@ interface ahb_if(input logic HCLK, input logic HRESETn);
 
   modport master (
     input  HCLK, HRESETn,
-    output HADDR, HTRANS, HWRITE, HSIZE, HBURST, HPROT, HMASTLOCK, HWDATA,
+    output HSEL, HADDR, HTRANS, HWRITE, HSIZE, HBURST, HPROT, HMASTLOCK, HWDATA,
     input  HRDATA, HREADYOUT, HRESP
   );
 
   modport slave (
     input  HCLK, HRESETn,
-    input  HADDR, HTRANS, HWRITE, HSIZE, HBURST, HPROT, HMASTLOCK, HWDATA,
+    input  HSEL, HADDR, HTRANS, HWRITE, HSIZE, HBURST, HPROT, HMASTLOCK, HWDATA,
     output HRDATA, HREADYOUT, HRESP
   );
 

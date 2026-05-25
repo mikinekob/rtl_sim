@@ -1,4 +1,4 @@
-SHELL := /bin/bash
+SHELL := /bin/tcsh
 
 XRUN ?= xrun
 TOP  ?= tb_top

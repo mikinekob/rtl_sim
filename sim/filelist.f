@@ -1,9 +1,7 @@
 # AHB + TB core
 sim/tb/ahb/ahb_if.sv
-
-# NOTE: keep ahb_types/bfm paths if you add them later
-# sim/tb/ahb/ahb_types.sv
-# sim/tb/ahb/ahb_master_bfm.sv
+sim/tb/ahb/ahb_types.sv
+sim/tb/ahb/ahb_master_bfm.sv
 
 # Register model / defs
 sim/tb/reg/reg_defs_pkg.sv

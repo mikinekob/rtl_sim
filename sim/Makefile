@@ -24,13 +24,15 @@ run:
 	mkdir -p $(OUT)
 	mkdir -p $(OUTPUT)/$(TEST)
 	$(XRUN) $(XRUN_FLAGS) $(XRUN_RUNFLAGS) +TEST=$(TEST) +SHMFILE
-	# Move generated waveforms to OUTPUT/$(TEST)
-	if ( -e wave.shm ) mv -f wave.shm $(OUTPUT)/$(TEST)/
-	if ( -e xmsim.shm ) mv -f xmsim.shm $(OUTPUT)/$(TEST)/
-	if ( -e xcelium.shm ) mv -f xcelium.shm $(OUTPUT)/$(TEST)/
-	if ( -e waves.shm ) mv -f waves.shm $(OUTPUT)/$(TEST)/
-	# Also move any remaining *.shm in the current dir
-	if ( "`ls -1 *.shm >& /dev/null; echo $$status`" == "0" ) mv -f *.shm $(OUTPUT)/$(TEST)/
+	# Move generated waveforms (SHM is typically a directory) to OUTPUT/$(TEST)
+	if ( -d wave.shm ) mv wave.shm $(OUTPUT)/$(TEST)/
+	if ( -d xmsim.shm ) mv xmsim.shm $(OUTPUT)/$(TEST)/
+	if ( -d xcelium.shm ) mv xcelium.shm $(OUTPUT)/$(TEST)/
+	if ( -d waves.shm ) mv waves.shm $(OUTPUT)/$(TEST)/
+	# Also move any remaining *.shm directories in the current dir
+	foreach d ( *.shm )
+		if ( -d $$d ) mv $$d $(OUTPUT)/$(TEST)/
+	end
 
 # Run each pattern in a separate xrun invocation so logs/waves are split per PAT.
 run-all:

@@ -9,11 +9,13 @@ sim/tb/dut_empty.sv
 # Register model / defs
 sim/tb/reg/reg_defs_pkg.sv
 sim/tb/reg/reg_model_pkg.sv
+sim/tb/reg/reg_model.svh
 sim/tb/reg/reg_checks_pkg.sv
 
 # Common runner
 sim/tb/common/test_names_pkg.sv
 sim/tb/common/test_runner.sv
+sim/tb/common/wavedump.sv
 
 # Patterns
 sim/pat/pat_hw_reset_smoke.sv
